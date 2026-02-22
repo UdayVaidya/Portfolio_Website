@@ -308,7 +308,7 @@ const Hero = () => {
 
             {/* Bottom orange line */}
             <motion.div
-                className="absolute bottom-5 left-0 w-full h-[2px]"
+                className="absolute bottom-0 left-0 w-full h-[2px]"
                 style={{ background: 'linear-gradient(90deg, transparent, #ff8400, transparent)', transformOrigin: 'left' }}
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
