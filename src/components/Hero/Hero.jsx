@@ -87,11 +87,18 @@ const socialLinks = [
 
 const Hero = () => {
     const [showScroll, setShowScroll] = useState(true);
+    const [shortScreen, setShortScreen] = useState(window.innerHeight < 650);
 
     useEffect(() => {
         const onScroll = () => setShowScroll(window.scrollY < window.innerHeight * 0.5);
         window.addEventListener('scroll', onScroll, { passive: true });
         return () => window.removeEventListener('scroll', onScroll);
+    }, []);
+
+    useEffect(() => {
+        const onResize = () => setShortScreen(window.innerHeight < 650);
+        window.addEventListener('resize', onResize);
+        return () => window.removeEventListener('resize', onResize);
     }, []);
 
     return (
@@ -224,9 +231,9 @@ const Hero = () => {
                 </div>
             </motion.div>
 
-            {/* Social links — mobile only: inline flow, shown between text and stats */}
+            {/* Social links — all screens: in-flow row below download button */}
             <motion.div
-                className="flex md:hidden flex-row justify-center gap-5 mt-5 pt-5"
+                className="flex flex-row gap-5 mt-5 pt-5"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 1.2 }}
@@ -307,25 +314,6 @@ const Hero = () => {
                 animate={{ scaleX: 1 }}
                 transition={{ duration: 1.2, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
             />
-
-            {/* Social links — desktop only: absolute left side column */}
-            <div className="hidden md:flex absolute left-[10%] items-center top-3/4 -translate-y-1/2 flex-col gap-5 z-20">
-                {socialLinks.map(({ href, alt, svg }) => (
-                    <motion.a
-                        key={alt}
-                        href={href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        whileHover={{ scale: 1.25, opacity: 1 }}
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 0.65, x: 0, duration: 1.4 }}
-                        transition={{ duration: 0.4 }}
-                        className="w-9 h-9"
-                    >
-                        {svg}
-                    </motion.a>
-                ))}
-            </div>
 
             <AnimatePresence>
                 {showScroll && (
