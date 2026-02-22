@@ -49,7 +49,7 @@ const letterVariants = {
 
 const About = () => {
     return (
-        <section id="about" className="relative py-24 px-[5%] overflow-hidden">
+        <section id="about" className="relative py-0 px-[5%] overflow-hidden">
 
             {/* Section heading */}
             <motion.div

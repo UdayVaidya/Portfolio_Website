@@ -233,7 +233,7 @@ const Hero = () => {
 
             {/* Social links — all screens: in-flow row below download button */}
             <motion.div
-                className="flex flex-row gap-5 mt-5 pt-5"
+                className="flex flex-row justify-center md:justify-start gap-5 mt-5 pt-5"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 1.2 }}
@@ -306,14 +306,6 @@ const Hero = () => {
                 </div>
             </motion.div>
 
-            {/* Bottom orange line */}
-            <motion.div
-                className="absolute bottom-0 left-0 w-full h-[2px]"
-                style={{ background: 'linear-gradient(90deg, transparent, #ff8400, transparent)', transformOrigin: 'left' }}
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ duration: 1.2, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            />
 
             <AnimatePresence>
                 {showScroll && (
