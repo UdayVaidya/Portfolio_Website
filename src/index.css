@@ -70,9 +70,12 @@ body {
 /* Mobile-only typewriter line height reservation */
 @media (max-width: 767px) {
   .typewriter-mobile-h {
-    min-height: calc(2 * 1.5em);
+    min-height: 5rem;
+    /* 2 lines × text-4xl (2.25rem) with some breathing room */
   }
 }
+
+
 
 /* Marquee ribbon animations */
 @keyframes marquee {
