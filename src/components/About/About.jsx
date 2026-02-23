@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import image from "../../../public/uday.jpeg";
 
 const fadeUp = {
     hidden: { opacity: 0, y: 40 },
@@ -99,7 +98,7 @@ const About = () => {
                         style={{ border: '2px solid rgba(255,132,0,0.35)' }}
                     />
                     <img
-                        src={image}
+                        src="/uday.jpeg"
                         alt="Uday Vaidya"
                         className="relative z-10 w-full rounded-2xl object-cover"
                         style={{ aspectRatio: '3/3', filter: 'brightness(0.85) contrast(1.05)' }}

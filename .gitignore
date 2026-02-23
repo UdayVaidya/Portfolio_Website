@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Environment variables — keep credentials private!
+.env
+.env.local
+.env.production

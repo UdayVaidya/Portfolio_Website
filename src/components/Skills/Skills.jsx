@@ -229,7 +229,7 @@ const Skills = () => {
                                 }}
                                 initial={{ opacity: 0, scale: 0.9 }}
                                 animate={{ opacity: 1, scale: 1 }}
-                                transition={{ duration: 0.25, delay: i * 0.05 }}
+                                transition={{ duration: 0.05, delay: i * 0.005 }}
                                 whileHover={{
                                     backgroundColor: 'rgba(255,132,0,0.15)',
                                     borderColor: 'rgba(255,132,0,0.5)',
