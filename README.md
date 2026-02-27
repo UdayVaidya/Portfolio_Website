@@ -10,7 +10,7 @@
 
 **A modern, animated developer portfolio built with React + Vite**
 
-[🌐 Live Demo]([https://portfolio-website-five-beta-92.vercel.app/]) · [📬 Contact Me](mailto:udayvaidya13@gmail.com)
+[🌐 Live Demo](https://portfolio-website-five-beta-92.vercel.app/) · [📬 Contact Me](mailto:udayvaidya13@gmail.com)
 
 </div>
 
