@@ -28,10 +28,10 @@ const fadeRight = {
 };
 
 const highlights = [
-    { icon: "⚡", label: "Fast Learner" },
-    { icon: "🛠️", label: "Problem Solver" },
-    { icon: "🎨", label: "Logic & Creativity" },
-    { icon: "🤝", label: "Team Player" },
+    { icon: "⚡", label: "5+ Deployed Projects" },
+    { icon: "🛠️", label: "80+ DSA Problems" },
+    { icon: "🎨", label: "Full-Stack Developer" },
+    { icon: "🤝", label: "Server Side Dev" },
 ];
 
 const nameLetters = "Uday Vaidya".split("");
@@ -48,7 +48,7 @@ const letterVariants = {
 
 const About = () => {
     return (
-        <section id="about" className="relative py-0 px-[5%] overflow-hidden">
+        <section id="about" className="relative py-3 px-[5%] overflow-hidden">
 
             {/* Section heading */}
             <motion.div
@@ -147,18 +147,21 @@ const About = () => {
                                 )
                             )}
                         </motion.span>
-                        {", "}a passionate{" "}
-                        <span className="text-arc-orange font-semibold">Full Stack Developer</span> who loves
-                        turning ideas into polished digital experiences.
+                        {", "}a {" "}
+                        <span className="text-arc-orange font-semibold">Full Stack Developer</span> focused on building
+                        scalable web applications, clean backend systems, and
+                        performance-optimized user interfaces.
                     </motion.p>
 
                     <motion.p
                         variants={fadeRight}
                         className="text-base md:text-xl text-white/50 leading-relaxed"
                     >
-                        I focus on building solid backend systems, clean RESTful APIs, and
-                        seamless CI/CD pipelines — while also crafting polished, responsive UIs
-                        that make the full stack experience feel effortless.
+                        I build end-to-end applications — from designing REST APIs
+                        and backend logic to creating responsive frontends using
+                        modern JavaScript frameworks. I enjoy solving real problems,
+                        optimizing performance, and deploying production-ready
+                        projects.
                     </motion.p>
 
                     {/* Highlights grid */}
@@ -207,14 +210,14 @@ const About = () => {
                             />
                             {/* Text on top */}
                             <motion.a
-                                href="#contact"
+                                href="#projects"
                                 className="relative z-10 md:text-2xl text-lg font-bold capitalize font-mono px-4 py-2 inline-block"
                                 variants={{
                                     rest: { color: '#ffffff' },
                                     hover: { color: '#ffffff' },
                                 }}
                             >
-                                Let's work together{" "}
+                                View My Projects{" "}
                                 <motion.span
                                     className="md:ml-2 ml-1"
                                     variants={{

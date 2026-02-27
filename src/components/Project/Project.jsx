@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, Fragment } from "react";
 
 const fadeUp = {
     hidden: { opacity: 0, y: 40 },
@@ -15,29 +16,35 @@ const projects = [
     {
         title: "CodeFlow Nexus",
         description:
-            "Collaborative code editor with real-time WebSocket integration for simultaneous multi-user editing. Features syntax highlighting, auto-completion, multi-language support, and secure authentication.",
+            "Built a real-time collaborative code editor where multiple users can edit code together using WebSockets. Implemented authentication and handled live syncing between users for smooth editing.",
         tags: ["React", "Node.js", "Socket.io"],
         github: "https://github.com/UdayVaidya",
         live: "https://code-flow-nexus.vercel.app/",
+        sub: "Real-time Collaboration Tool",
         accent: "#ff8400",
+        thumbnail: "/thumbnails/CodeFlowNexus.png"
     },
     {
         title: "Job Tracker With Embedded GenAI",
         description:
-            "AI-powered job tracking application with GenAI for intelligent job search and recommendations. Integrated 2 GenAI APIs for skills extraction from resumes, reducing manual recruiter review time by ~1 hour weekly.",
+            "AI-powered job tracking application with GenAI for intelligent job search and recommendations. Integrated 2 GenAI APIs for skills extraction from resumes",
         tags: ["React", "Node.js", "MongoDB", "Express", "GenAI"],
         github: "https://github.com/UdayVaidya",
         live: "https://ai-job-tracker-kappa.vercel.app/",
+        sub: "AI-assisted Productivity App",
         accent: "#ff8400",
+        thumbnail: "/thumbnails/AIJobTracker.png"
     },
     {
         title: "BuzzRoom",
         description:
-            "Real-time chat application with 95% backend efficiency and secure MySQL authentication (99.9% uptime). Implemented WebSocket for instant messaging with 200ms latency and fully responsive UI design.",
+            "Developed a real-time chat application using WebSockets with secure authentication and fast message delivery. Focused on backend performance and responsive UI.",
         tags: ["Node.js", "Express.js", "MySQL", "WebSocket"],
         github: "https://github.com/UdayVaidya",
         live: "",
+        sub: "Real-time Messaging System",
         accent: "#ff8400",
+        thumbnail: ""
     },
     {
         title: "MovieFlix",
@@ -46,9 +53,16 @@ const projects = [
         tags: ["React", "Tailwind CSS", "API"],
         github: "https://github.com/UdayVaidya",
         live: "https://movie-flix-roan.vercel.app/",
+        sub: "API-driven Dashboard",
         accent: "#ff8400",
+        thumbnail: "/thumbnails/Movieflix.png"
     }
 ];
+
+// Real-time Collaboration Tool
+// AI-assisted Productivity App
+// Real-time Messaging System
+// API-driven Dashboard
 
 const experiences = [
     {
@@ -123,17 +137,21 @@ const SectionHeading = ({ label, title, highlight }) => (
 // ─── MAIN COMPONENT ──────────────────────────────────────────────────────────
 
 const Project = () => {
+    const [hoveredIndex, setHoveredIndex] = useState(null);
+    const hoveredProject = hoveredIndex !== null ? projects[hoveredIndex] : null;
+
+
     return (
         <section id="projects" className="relative py-24 px-[5%] overflow-hidden">
 
             {/* ── PROJECTS ── */}
             <SectionHeading label="// what i built" title="Featured" highlight="Projects" />
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-32">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-32 overflow-visible">
                 {projects.map((proj, i) => (
                     <motion.div
                         key={proj.title}
-                        className="relative flex flex-col gap-4 p-6 rounded-2xl overflow-hidden group"
+                        className="relative flex flex-col gap-4 p-6 rounded-2xl overflow-visible group"
                         style={{
                             background: "rgba(255,132,0,0.04)",
                             border: "1px solid rgba(255,132,0,0.15)",
@@ -141,11 +159,17 @@ const Project = () => {
                         initial={{ opacity: 0, y: 40 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, amount: 0.2 }}
-                        transition={{ duration: 0.6, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                        transition={{
+                            duration: 0.6,
+                            delay: i * 0.1,
+                            ease: [0.22, 1, 0.36, 1],
+                        }}
                         whileHover={{
                             borderColor: "rgba(255,132,0,0.5)",
                             backgroundColor: "rgba(255,132,0,0.08)",
                         }}
+                        onMouseEnter={() => proj.thumbnail && setHoveredIndex(i)}
+                        onMouseLeave={() => setHoveredIndex(null)}
                     >
                         {/* Corner number */}
                         <span
@@ -163,6 +187,11 @@ const Project = () => {
                         {/* Description */}
                         <p className="text-white/50 text-sm md:text-base leading-relaxed flex-1">
                             {proj.description}
+                        </p>
+
+                        {/* Sub line */}
+                        <p className="text-arc-orange/80 text-sm md:text-base font-mono tracking-wider">
+                            {proj.sub}
                         </p>
 
                         {/* Tags */}
@@ -189,28 +218,50 @@ const Project = () => {
                                     href={proj.github}
                                     target="_blank"
                                     rel="noreferrer"
-                                    className="flex items-center gap-2 text-sm font-mono font-semibold text-white/60 hover:text-white transition-colors"
+                                    className="flex items-center gap-2 text-sm font-mono font-semibold text-white/60 hover:text-white"
                                     whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.97 }}
                                 >
                                     <GitHubIcon /> GitHub
                                 </motion.a>
                             )}
+
                             {proj.live && (
                                 <motion.a
                                     href={proj.live}
                                     target="_blank"
                                     rel="noreferrer"
-                                    className="flex items-center gap-2 text-sm font-mono font-semibold text-arc-orange hover:text-white transition-colors"
+                                    className="flex items-center gap-2 text-sm font-mono font-semibold text-arc-orange hover:text-white"
                                     whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.97 }}
                                 >
                                     <ExternalIcon /> Live Demo
                                 </motion.a>
                             )}
                         </div>
+
+                        {/* ✅ THUMBNAIL (IMPORTANT — INSIDE CARD) */}
+                        <AnimatePresence>
+                            {hoveredIndex === i && proj.thumbnail && (
+                                <motion.div
+                                    initial={{ opacity: 0, x: 40, scale: 0.95 }}
+                                    animate={{ opacity: 1, x: -20, scale: 1 }}
+                                    exit={{ opacity: 0, x: 40, scale: 0.95 }}
+                                    transition={{ duration: 0.25 }}
+                                    className="absolute right-0 top-1/2 -translate-y-1/2
+                     w-72 rounded-xl overflow-hidden
+                     border border-white/10 shadow-2xl
+                     pointer-events-none hidden lg:block"
+                                >
+                                    <img
+                                        src={proj.thumbnail}
+                                        alt={proj.title}
+                                        className="w-full h-full object-cover"
+                                    />
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
                     </motion.div>
                 ))}
+
             </div>
 
             {/* ── EXPERIENCE ── */}

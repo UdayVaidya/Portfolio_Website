@@ -18,6 +18,7 @@
 html,
 body {
   overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 @theme {
@@ -67,14 +68,39 @@ body {
   scrollbar-color: #ff8400 #1a1a1a;
 }
 
-/* Mobile-only typewriter line height reservation */
-@media (max-width: 767px) {
+/* Typewriter line height reservation to prevent layout shift */
+.typewriter-mobile-h {
+  min-height: 5.5rem;
+  /* text-4xl (2.25rem) × 2 */
+}
+
+@media (min-width: 640px) {
   .typewriter-mobile-h {
-    min-height: 5rem;
-    /* 2 lines × text-4xl (2.25rem) with some breathing room */
+    min-height: 7rem;
+    /* text-5xl (3rem) × 2 */
   }
 }
 
+@media (min-width: 768px) {
+  .typewriter-mobile-h {
+    min-height: 8.5rem;
+    /* text-6xl (3.75rem) × 2 */
+  }
+}
+
+@media (min-width: 1024px) {
+  .typewriter-mobile-h {
+    min-height: 13rem;
+    /* text-8xl (6rem) × 2 */
+  }
+}
+
+@media (min-width: 1440px) {
+  .typewriter-mobile-h {
+    min-height: 13rem;
+    /* text-8xl (6rem) × 2 */
+  }
+}
 
 
 /* Marquee ribbon animations */

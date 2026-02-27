@@ -175,7 +175,7 @@ const Hero = () => {
                 <div className="typerwriter">
                     <motion.p
                         variants={lineVariants}
-                        className="text-4xl sm:text-5xl lg:text-8xl md:text-6xl font-extrabold uppercase font-mono typewriter-mobile-h"
+                        className="text-4xl sm:text-5xl lg:text-8xl md:text-6xl md:font-extrabold font-bold lg:font-extrabold  uppercase   typewriter-mobile-h"
                         style={{ fontFamily: '"Roboto Condensed", sans-serif' }}
                     >
                         I am{" "}

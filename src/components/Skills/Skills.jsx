@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, useMemo, useEffect } from "react";
 
 const fadeUp = {
     hidden: { opacity: 0, y: 40 },
@@ -42,12 +42,11 @@ const pillsList = {
         { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg", label: "MongoDB" },
         { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg", label: "PostgreSQL" },
         { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg", label: "Redis" },
-        { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongoose/mongoose-original.svg", label: "Mongoose", invert: true },
         { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/socketio/socketio-original.svg", label: "Socket.IO", invert: true },
+        { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongoose/mongoose-original.svg", label: "Mongoose", invert: true },
     ],
     Frontend: [
         { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg", label: "React" },
-        { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg", label: "Next.js", invert: true },
         { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg", label: "JavaScript" },
         { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg", label: "TypeScript" },
         { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg", label: "Tailwind" },
@@ -83,12 +82,11 @@ const pillsList = {
     ]
 };
 
-// Duplicate for seamless loop  
-const r1 = [...row1, ...row1];
-const r2 = [...row2, ...row2];
+
+
 
 const RibbonItem = ({ icon, label, invert = false }) => (
-    <div className="flex items-center gap-2 md:gap-3 mx-3 md:mx-6 md:py-2  shrink-0">
+    <div className="flex items-center gap-2 md:gap-3 mx-3 md:mx-6 md:py-3  shrink-0">
         <img
             src={icon}
             alt={label}
@@ -104,15 +102,27 @@ const RibbonItem = ({ icon, label, invert = false }) => (
 
 const Skills = () => {
     const [activeTab, setActiveTab] = useState(Object.keys(pillsList)[0]);
+    // Duplicate for seamless loop  
+    const r1 = useMemo(() => [...row1, ...row1], []);
+    const r2 = useMemo(() => [...row2, ...row2], []);
+
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const check = () => setIsMobile(window.innerWidth < 768);
+        check();
+        window.addEventListener("resize", check);
+        return () => window.removeEventListener("resize", check);
+    }, []);
 
     return (
-        <section id="skills" className="relative py-24 overflow-hidden">
+        <section id="skills" className="relative pt-35 pb-14 overflow-hidden">
 
             {/* Ribbons container */}
             <motion.div
                 className="relative flex flex-col gap-0 mt-4"
                 initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
+                whileInView={{ opacity: 0.85 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.4 }}
             >
@@ -121,7 +131,7 @@ const Skills = () => {
                     className="w-full py-3 md:py-4  overflow-hidden"
                     style={{
                         background: '#ff8400',
-                        transform: window?.innerWidth < 768 ? 'rotate(-13deg) scaleX(1.1)' : 'rotate(-9deg) scaleX(1.15)',
+                        transform: isMobile ? 'rotate(-13deg) scaleX(1.1)' : 'rotate(-9deg) scaleX(1.15)',
                         marginBottom: '-18px',
                         boxShadow: '0 8px 40px rgba(255,132,0,0.35)',
                     }}
@@ -141,7 +151,7 @@ const Skills = () => {
                     className="w-full py-3 md:py-4 overflow-hidden"
                     style={{
                         background: '#ff8400',
-                        transform: window?.innerWidth < 768 ? 'rotate(13deg) scaleX(1.1)' : 'rotate(9deg) scaleX(1.15)',
+                        transform: isMobile ? 'rotate(13deg) scaleX(1.1)' : 'rotate(9deg) scaleX(1.15)',
                         marginTop: '-18px',
                         boxShadow: '0 -8px 40px rgba(255,132,0,0.35)',
                     }}
@@ -157,7 +167,7 @@ const Skills = () => {
             {/* Section heading */}
             <div className="px-[5%] py-10 md:py-20">
                 <motion.div
-                    className="mb-14"
+                    className="mb-1"
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, amount: 0.3 }}
@@ -165,16 +175,16 @@ const Skills = () => {
                     <motion.p
                         variants={fadeUp}
                         custom={0}
-                        className="text-arc-orange font-mono text-sm uppercase tracking-[0.25em] mb-2"
+                        className="text-arc-orange font-mono text-sm uppercase tracking-[0.25em] mb-1"
                     >
                         // what i do
                     </motion.p>
                     <motion.h2
                         variants={fadeUp}
                         custom={0.1}
-                        className="text-4xl md:text-6xl font-extrabold uppercase font-mono"
+                        className="text-4xl md:text-6xl font-bold lg:font-extrabold uppercase font-mono"
                     >
-                        Skills & <span className="gradient-text">Expertise</span>
+                        Tech Stack & <span className="gradient-text">Expertise</span>
                     </motion.h2>
                     <motion.div
                         className="mt-3 h-[2px] w-16"
@@ -187,10 +197,29 @@ const Skills = () => {
                 </motion.div>
             </div>
 
+            {/* Sub Heading */}
+            <div className="px-[5%] ">
+                <motion.div
+                    className="mb-5"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.3 }}
+                >
+                    <motion.p
+                        variants={fadeUp}
+                        custom={0}
+                        className="font-mono  uppercase tracking-[0.25em] mb-2"
+                    >
+                        <span className="text-arc-orange text-lg">Technologies</span> I use to build scalable full-stack applications.
+                    </motion.p>
+
+                </motion.div>
+            </div>
+
             {/* Skills pills tab */}
             <div className="px-[5%] py-3">
                 {/* Category tab buttons */}
-                <div className="flex flex-wrap gap-2 mb-8">
+                <div className="flex flex-wrap gap-2 mb-5">
                     {Object.keys(pillsList).map((cat) => (
                         <motion.button
                             key={cat}
@@ -249,6 +278,24 @@ const Skills = () => {
                         ))}
                     </motion.div>
                 </AnimatePresence>
+            </div>
+
+            <div className="px-[5%] mt-6">
+                <motion.div
+                    className=""
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.3 }}
+                >
+                    <motion.p
+                        variants={fadeUp}
+                        custom={0}
+                        className="font-mono  uppercase tracking-[0.25em] mb-1"
+                    >
+                        <span className="text-arc-orange text-lg">Applied</span> in real-world deployed applications.
+                    </motion.p>
+
+                </motion.div>
             </div>
 
 

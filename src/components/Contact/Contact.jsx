@@ -142,7 +142,7 @@ const Contact = () => {
                     {/* Glitch-style large heading */}
                     <div className="relative inline-block">
                         <motion.h2
-                            className="text-6xl md:text-8xl font-extrabold font-mono uppercase leading-none"
+                            className="text-5xl md:text-7xl font-extrabold font-mono uppercase leading-none"
                             initial={{ opacity: 0, x: -40 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
@@ -150,7 +150,7 @@ const Contact = () => {
                         >
                             Let's{" "}
                             <span className="relative inline-block">
-                                <span className="gradient-text">Talk.</span>
+                                <span className="gradient-text">Connect.</span>
                                 {/* Underline sweep */}
                                 <motion.span
                                     className="absolute -bottom-2 left-0 h-[3px] rounded-full"
@@ -172,7 +172,8 @@ const Contact = () => {
                         viewport={{ once: true }}
                         transition={{ duration: 0.8, delay: 0.3 }}
                     >
-                        Have a project in mind? Let's build something great together. Drop me a message and I'll get back to you within 24 hours.
+                        Open to internships and full-time opportunities.
+                        Feel free to reach out — I usually reply within 24 hours.
                     </motion.p>
                 </motion.div>
 
