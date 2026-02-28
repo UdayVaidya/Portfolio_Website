@@ -148,7 +148,7 @@ const About = () => {
                             )}
                         </motion.span>
                         {", "}a {" "}
-                        <span className="text-arc-orange font-semibold">Full Stack Developer</span> focused on building
+                        <span className="text-arc-orange font-semibold font-mono tracking-wider">Full Stack Developer</span> focused on building
                         scalable web applications, clean backend systems, and
                         performance-optimized user interfaces.
                     </motion.p>

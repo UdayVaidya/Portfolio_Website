@@ -109,14 +109,17 @@ const Navbar = () => {
                             />
                         </motion.li>
                     ))}
-                    <a
+                    <motion.a
                         href="#contact"
-                        onClick={(e) => handleNavClick(e, '#contact')}
-                        className="w-full text-center px-3 py-2 rounded-2xl font-bold text-md text-white transition-colors duration-300 ease-in-out"
-                        style={{ background: 'linear-gradient(135deg, #ff8400, #cc6a00)' }}
+                        onClick={(e) => handleNavClick(e, "#contact")}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.96 }}
+                        className="w-full text-center px-5 py-2 rounded-2xl
+                                    font-semibold text-md text-white"
+                        style={{ background: "linear-gradient(135deg, #ff8400, #cc6a00)" }}
                     >
-                        Let's Talk
-                    </a>
+                        Let's Connect
+                    </motion.a>
                 </motion.ul>
             </motion.div>
 
@@ -143,14 +146,17 @@ const Navbar = () => {
                                     {link.label}
                                 </a>
                             ))}
-                            <a
+                            <motion.a
                                 href="#contact"
-                                onClick={(e) => handleNavClick(e, '#contact')}
-                                className="mt-2 w-full text-center px-5 py-2 rounded-2xl font-semibold text-md text-white"
-                                style={{ background: 'linear-gradient(135deg, #ff8400, #cc6a00)' }}
+                                onClick={(e) => handleNavClick(e, "#contact")}
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.96 }}
+                                className="mt-2 w-full text-center px-5 py-2 rounded-2xl
+                                            font-semibold text-md text-white"
+                                style={{ background: "linear-gradient(135deg, #ff8400, #cc6a00)" }}
                             >
-                                Let's Talk
-                            </a>
+                                Let's Connect
+                            </motion.a>
                         </div>
                     </motion.div>
                 )}

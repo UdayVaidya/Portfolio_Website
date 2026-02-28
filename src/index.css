@@ -97,7 +97,7 @@ body {
 
 @media (min-width: 1440px) {
   .typewriter-mobile-h {
-    min-height: 13rem;
+    min-height: 8rem;
     /* text-8xl (6rem) × 2 */
   }
 }

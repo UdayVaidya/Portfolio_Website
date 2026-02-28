@@ -71,7 +71,8 @@ const experiences = [
         duration: "June 2025 – Aug 2025",
         points: [
             "Developed full-stack web applications using MERN stack with focus on scalable architecture and deployment.",
-            "Engineered scalable REST APIs using Node.js and Express, processing 1,500 req/s with 99.95% uptime.",
+            "Engineered scalable REST APIs using Node.js and Expressjs with SQL & NoSQL database management.",
+            "Implemented secure authentication systems for user-centric applications.",
         ],
     },
     {
@@ -138,8 +139,8 @@ const SectionHeading = ({ label, title, highlight }) => (
 
 const Project = () => {
     const [hoveredIndex, setHoveredIndex] = useState(null);
-    const hoveredProject = hoveredIndex !== null ? projects[hoveredIndex] : null;
 
+    console.log(window.innerWidth)
 
     return (
         <section id="projects" className="relative py-24 px-[5%] overflow-hidden">
@@ -190,7 +191,7 @@ const Project = () => {
                         </p>
 
                         {/* Sub line */}
-                        <p className="text-arc-orange/80 text-sm md:text-base font-mono tracking-wider">
+                        <p className="text-arc-orange/80 text-sm md:text-sm font-mono tracking-wider">
                             {proj.sub}
                         </p>
 
@@ -238,18 +239,42 @@ const Project = () => {
                             )}
                         </div>
 
-                        {/* ✅ THUMBNAIL (IMPORTANT — INSIDE CARD) */}
+                        {/* THUMBNAIL (IMPORTANT — INSIDE CARD) */}
                         <AnimatePresence>
                             {hoveredIndex === i && proj.thumbnail && (
                                 <motion.div
-                                    initial={{ opacity: 0, x: 40, scale: 0.95 }}
-                                    animate={{ opacity: 1, x: -20, scale: 1 }}
-                                    exit={{ opacity: 0, x: 40, scale: 0.95 }}
-                                    transition={{ duration: 0.25 }}
+                                    initial={{
+                                        opacity: 0,
+                                        scaleX: 0.2,
+                                        scaleY: 0.6,
+                                        x: 80,
+                                        skewX: 15,
+                                        transformOrigin: "right center",
+                                    }}
+                                    animate={{
+                                        opacity: 1,
+                                        scaleX: 1,
+                                        scaleY: 1,
+                                        x: -60,
+                                        skewX: 0,
+                                    }}
+                                    exit={{
+                                        opacity: 0,
+                                        scaleX: 0.2,
+                                        scaleY: 0.6,
+                                        x: 80,
+                                        skewX: 15,
+                                    }}
+                                    transition={{
+                                        type: "spring",
+                                        stiffness: 260,
+                                        damping: 22,
+                                        mass: 0.6,
+                                    }}
                                     className="absolute right-0 top-1/2 -translate-y-1/2
-                     w-72 rounded-xl overflow-hidden
-                     border border-white/10 shadow-2xl
-                     pointer-events-none hidden lg:block"
+                                            w-72 rounded-xl overflow-hidden
+                                            border border-white/10 shadow-2xl
+                                            pointer-events-none hidden lg:block"
                                 >
                                     <img
                                         src={proj.thumbnail}
@@ -268,10 +293,18 @@ const Project = () => {
             <SectionHeading label="// where i've worked" title="Work" highlight="Experience" />
 
             <div className="relative">
-                {/* Vertical line */}
-                <div
-                    className="absolute left-0 md:left-6 top-0 h-full w-[2px]"
-                    style={{ background: "linear-gradient(to bottom, #ff8400, rgba(255,132,0,0.05))" }}
+
+                {/* ─── Animated Vertical Line ─── */}
+                <motion.div
+                    className="absolute left-0 md:left-6 top-0 w-[2px]"
+                    style={{
+                        background:
+                            "linear-gradient(to bottom, #ff8400, rgba(255,132,0,0.05))",
+                    }}
+                    initial={{ height: 0 }}
+                    whileInView={{ height: "100%" }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1.2, ease: "easeOut" }}
                 />
 
                 <div className="flex flex-col gap-10 pl-8 md:pl-20">
@@ -282,33 +315,64 @@ const Project = () => {
                             initial={{ opacity: 0, x: -30 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true, amount: 0.3 }}
-                            transition={{ duration: 0.6, delay: i * 0.15, ease: [0.22, 1, 0.36, 1] }}
+                            transition={{
+                                duration: 0.6,
+                                delay: i * 0.15,
+                                ease: [0.22, 1, 0.36, 1],
+                            }}
                         >
-                            {/* Timeline dot */}
+
+                            {/* ─── Timeline Dot ─── */}
                             <div
-                                className="absolute -left-[2.40rem] md:-left-[3.9rem] top-1 w-4 h-4 rounded-full border-2 flex items-center justify-center"
-                                style={{ borderColor: "#ff8400", background: "#0a0a0a" }}
+                                className="absolute -left-[2.40rem] md:-left-[3.9rem] top-1
+                               w-4 h-4 rounded-full border-2
+                               flex items-center justify-center"
+                                style={{
+                                    borderColor: "#ff8400",
+                                    background: "#0a0a0a",
+                                }}
                             >
-                                <div className="w-2 h-2 rounded-full" style={{ background: "#ff8400" }} />
+                                <motion.div
+                                    className="w-2 h-2 rounded-full"
+                                    style={{ background: "#ff8400" }}
+                                    animate={{
+                                        scale: [1, 1.4, 1],
+                                        opacity: [1, 0.6, 1],
+                                    }}
+                                    transition={{
+                                        duration: 2,
+                                        repeat: Infinity,
+                                        ease: "easeInOut",
+                                    }}
+                                />
                             </div>
 
-                            {/* Card */}
-                            <div
+                            {/* ─── Card ─── */}
+                            <motion.div
                                 className="p-5 md:p-6 rounded-2xl"
                                 style={{
                                     background: "rgba(255,132,0,0.04)",
                                     border: "1px solid rgba(255,132,0,0.15)",
                                 }}
+                                whileHover={{
+                                    y: -6,
+                                    borderColor: "rgba(255,132,0,0.4)",
+                                    boxShadow:
+                                        "0 20px 40px rgba(255,132,0,0.15)",
+                                }}
+                                transition={{ duration: 0.25 }}
                             >
                                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-1 mb-3">
                                     <div>
                                         <h3 className="font-mono font-extrabold text-lg md:text-xl text-white/90 uppercase">
                                             {exp.role}
                                         </h3>
+
                                         <p className="text-arc-orange font-mono text-sm font-semibold">
                                             {exp.company}
                                         </p>
                                     </div>
+
                                     <span
                                         className="text-xs font-mono px-3 py-1 rounded-full self-start md:self-auto"
                                         style={{
@@ -324,13 +388,18 @@ const Project = () => {
 
                                 <ul className="flex flex-col gap-2">
                                     {exp.points.map((pt, j) => (
-                                        <li key={j} className="flex items-start gap-2 text-sm md:text-base text-white/50 leading-relaxed">
-                                            <span className="text-arc-orange mt-1 shrink-0">▹</span>
-                                            {pt}
+                                        <li
+                                            key={j}
+                                            className="flex gap-3 text-sm md:text-[1rem] font-bold text-white/50 leading-relaxed m-2"
+                                        >
+                                            <span className="text-arc-orange mt-0 shrink-0">
+                                                →
+                                            </span>
+                                            <span>{pt}</span>
                                         </li>
                                     ))}
                                 </ul>
-                            </div>
+                            </motion.div>
                         </motion.div>
                     ))}
                 </div>
