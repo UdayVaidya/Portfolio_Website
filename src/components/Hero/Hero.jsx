@@ -172,10 +172,10 @@ const Hero = () => {
                 </motion.h1>
 
                 {/* Line 3 */}
-                <div className="typerwriter">
+                <div className="typerwriter lg:max-w-[68%] overflow-hidden">
                     <motion.p
                         variants={lineVariants}
-                        className="text-4xl sm:text-5xl lg:text-8xl md:text-6xl md:font-extrabold font-bold lg:font-extrabold  uppercase   typewriter-mobile-h"
+                        className="text-4xl sm:text-5xl lg:text-8xl md:text-6xl md:font-extrabold font-bold lg:font-extrabold uppercase typewriter-mobile-h"
                         style={{ fontFamily: '"Roboto Condensed", sans-serif' }}
                     >
                         I am{" "}
@@ -254,7 +254,7 @@ const Hero = () => {
 
             {/* Stats bar — mobile: pill card (flex bottom), desktop: absolute vertical list */}
             <motion.div
-                className="mt-5 lg:mt-10 lg:absolute lg:bottom-15 lg:left-auto lg:right-30 pb-4 lg:pb-0 z-10"
+                className="mt-5 lg:mt-10 lg:absolute lg:bottom-15 lg:left-auto lg:right-20 pb-4 lg:pb-0 z-10"
                 initial="hidden"
                 animate="visible"
                 variants={{
