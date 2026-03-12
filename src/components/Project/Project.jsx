@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, Fragment } from "react";
+import { useState, useEffect, Fragment } from "react";
 
 const fadeUp = {
     hidden: { opacity: 0, y: 40 },
@@ -18,7 +18,7 @@ const projects = [
         description:
             "Built a real-time collaborative code editor where multiple users can edit code together using WebSockets. Implemented authentication and handled live syncing between users for smooth editing.",
         tags: ["React", "Node.js", "Socket.io"],
-        github: "https://github.com/UdayVaidya",
+        github: "https://github.com/UdayVaidya/CodeFlow-Nexus",
         live: "https://code-flow-nexus.vercel.app/",
         sub: "Real-time Collaboration Tool",
         accent: "#ff8400",
@@ -29,29 +29,29 @@ const projects = [
         description:
             "AI-powered job tracking application with GenAI for intelligent job search and recommendations. Integrated 2 GenAI APIs for skills extraction from resumes",
         tags: ["React", "Node.js", "MongoDB", "Express", "GenAI"],
-        github: "https://github.com/UdayVaidya",
+        github: "https://github.com/UdayVaidya/AI-Job-Tracker",
         live: "https://ai-job-tracker-kappa.vercel.app/",
         sub: "AI-assisted Productivity App",
         accent: "#ff8400",
         thumbnail: "/thumbnails/AIJobTracker.png"
     },
     {
-        title: "BuzzRoom",
+        title: "CineMatheque",
         description:
             "Developed a real-time chat application using WebSockets with secure authentication and fast message delivery. Focused on backend performance and responsive UI.",
-        tags: ["Node.js", "Express.js", "MySQL", "WebSocket"],
-        github: "https://github.com/UdayVaidya",
-        live: "",
-        sub: "Real-time Messaging System",
+        tags: ["Node.js", "Express.js", "ReactJS", "MongoDB"],
+        github: "https://github.com/UdayVaidya/CineMathe2ue",
+        live: "https://cine-mathe2ue.vercel.app",
+        sub: "Full Stack Movie Recommendation System with AI models mood scanner",
         accent: "#ff8400",
-        thumbnail: ""
+        thumbnail: "/thumbnails/CineMathe2ue.png"
     },
     {
         title: "MovieFlix",
         description:
             "A movie discovery dashboard to browse, search, and explore movies and TV shows with details, ratings, and trailers — powered by a public movie API.",
         tags: ["React", "Tailwind CSS", "API"],
-        github: "https://github.com/UdayVaidya",
+        github: "https://github.com/UdayVaidya/Movie-Flix",
         live: "https://movie-flix-roan.vercel.app/",
         sub: "API-driven Dashboard",
         accent: "#ff8400",
@@ -140,7 +140,15 @@ const SectionHeading = ({ label, title, highlight }) => (
 const Project = () => {
     const [hoveredIndex, setHoveredIndex] = useState(null);
 
-    console.log(window.innerWidth)
+    // Preload all thumbnails on mount so hover is instant
+    useEffect(() => {
+        projects.forEach((proj) => {
+            if (proj.thumbnail) {
+                const img = new Image();
+                img.src = proj.thumbnail;
+            }
+        });
+    }, []);
 
     return (
         <section id="projects" className="relative py-24 px-[5%] overflow-hidden">
@@ -272,7 +280,7 @@ const Project = () => {
                                         mass: 0.6,
                                     }}
                                     className="absolute right-0 top-1/2 -translate-y-1/2
-                                            w-72 rounded-xl overflow-hidden
+                                            w-110 rounded-xl overflow-hidden
                                             border border-white/10 shadow-2xl
                                             pointer-events-none hidden lg:block"
                                 >
@@ -280,6 +288,8 @@ const Project = () => {
                                         src={proj.thumbnail}
                                         alt={proj.title}
                                         className="w-full h-full object-cover"
+                                        loading="eager"
+                                        decoding="async"
                                     />
                                 </motion.div>
                             )}
