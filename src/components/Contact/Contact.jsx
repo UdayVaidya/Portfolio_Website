@@ -362,17 +362,52 @@ const Contact = () => {
                 </div>
             </div>
 
-            {/* Footer */}
-            <motion.div
-                className="mt-24 px-[5%] pt-6 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-3"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-            >
-                <p className="font-mono text-sm text-white/20">© 2025 Uday Vaidya. All rights reserved.</p>
-                <p className="font-mono text-sm text-white/20">Built By <span className="text-arc-orange">Uday Vaidya</span></p>
-            </motion.div>
+            {/* ── Massive Marquee Footer ── */}
+            <div className="mt-24 pb-8 border-t border-white/5 pt-12 relative overflow-hidden flex flex-col items-center">
+                {/* Gradient masks for marquee edges */}
+                <div className="absolute top-12 bottom-8 left-0 w-24 z-10 
+                                bg-gradient-to-r from-[#0d0d0d] to-transparent pointer-events-none" />
+                <div className="absolute top-12 bottom-8 right-0 w-24 z-10 
+                                bg-gradient-to-l from-[#0d0d0d] to-transparent pointer-events-none" />
+                
+                {/* Scrolling text */}
+                <div className="flex w-[200vw] sm:w-[150vw] md:w-full overflow-hidden">
+                    <motion.div
+                        className="flex whitespace-nowrap"
+                        animate={{ x: ["0%", "-50%"] }}
+                        transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+                    >
+                        {Array.from({ length: 4 }).map((_, i) => (
+                            <span
+                                key={i}
+                                className="font-mono font-black text-6xl md:text-[8rem] uppercase leading-none tracking-tighter shrink-0 px-8"
+                                style={{
+                                    color: "transparent",
+                                    WebkitTextStroke: "2px rgba(255,132,0,0.15)",
+                                }}
+                            >
+                                Let's Build Something <span style={{ color: "rgba(255,132,0,0.9)", WebkitTextStroke: "0" }}>Great</span> •
+                            </span>
+                        ))}
+                    </motion.div>
+                </div>
+
+                {/* Subfooter */}
+                <motion.div
+                    className="w-full px-[5%] pt-12 flex flex-col md:flex-row items-center justify-between gap-3 mt-4"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8 }}
+                >
+                    <p className="font-mono text-sm text-white/20 text-center md:text-left">
+                        © {new Date().getFullYear()} Uday Vaidya. All rights reserved.
+                    </p>
+                    <p className="font-mono text-sm text-white/20 text-center md:text-right">
+                        Designed & Built with <span className="text-red-500 animate-pulse inline-block">♥</span> by <span className="text-arc-orange font-bold tracking-widest uppercase">Uday Vaidya</span>
+                    </p>
+                </motion.div>
+            </div>
         </section>
     );
 };

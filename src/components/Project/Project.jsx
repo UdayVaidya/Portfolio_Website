@@ -165,18 +165,20 @@ const Project = () => {
                             background: "rgba(255,132,0,0.04)",
                             border: "1px solid rgba(255,132,0,0.15)",
                         }}
-                        initial={{ opacity: 0, y: 40 }}
+                        initial={{ opacity: 0, y: 48 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, amount: 0.2 }}
+                        viewport={{ once: true, amount: 0.15 }}
                         transition={{
-                            duration: 0.6,
+                            duration: 0.65,
                             delay: i * 0.1,
                             ease: [0.22, 1, 0.36, 1],
                         }}
                         whileHover={{
                             borderColor: "rgba(255,132,0,0.5)",
                             backgroundColor: "rgba(255,132,0,0.08)",
+                            y: -4,
                         }}
+                        whileTap={{ scale: 0.98, borderColor: "rgba(255,132,0,0.6)" }}
                         onMouseEnter={() => proj.thumbnail && setHoveredIndex(i)}
                         onMouseLeave={() => setHoveredIndex(null)}
                     >
@@ -247,7 +249,25 @@ const Project = () => {
                             )}
                         </div>
 
-                        {/* THUMBNAIL (IMPORTANT — INSIDE CARD) */}
+                        {/* THUMBNAIL — mobile: inline below description, desktop: hover overlay */}
+                        {proj.thumbnail && (
+                            <motion.div
+                                className="block lg:hidden mt-2 rounded-xl overflow-hidden border border-white/10"
+                                initial={{ opacity: 0, y: 16 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.5, delay: 0.2 }}
+                            >
+                                <img
+                                    src={proj.thumbnail}
+                                    alt={proj.title}
+                                    className="w-full h-40 object-cover"
+                                    loading="lazy"
+                                />
+                            </motion.div>
+                        )}
+
+                        {/* THUMBNAIL — desktop hover overlay */}
                         <AnimatePresence>
                             {hoveredIndex === i && proj.thumbnail && (
                                 <motion.div
@@ -370,6 +390,7 @@ const Project = () => {
                                     boxShadow:
                                         "0 20px 40px rgba(255,132,0,0.15)",
                                 }}
+                                whileTap={{ scale: 0.98, boxShadow: "0 4px 16px rgba(255,132,0,0.1)" }}
                                 transition={{ duration: 0.25 }}
                             >
                                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-1 mb-3">

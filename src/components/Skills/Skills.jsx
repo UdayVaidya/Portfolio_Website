@@ -82,6 +82,14 @@ const pillsList = {
     ]
 };
 
+const CATEGORY_ICONS = {
+    Backend: "⚙️",
+    Frontend: "🎨",
+    DevOps: "🚀",
+    Tools: "🛠️",
+    Languages: "💻"
+};
+
 
 
 
@@ -219,23 +227,38 @@ const Skills = () => {
             {/* Skills pills tab */}
             <div className="px-[5%] py-3">
                 {/* Category tab buttons */}
-                <div className="flex flex-wrap gap-2 mb-5">
-                    {Object.keys(pillsList).map((cat) => (
-                        <motion.button
-                            key={cat}
-                            onClick={() => setActiveTab(cat)}
-                            className="relative px-5 py-2 rounded-full font-mono font-bold text-sm uppercase tracking-wider transition-colors duration-200"
-                            style={{
-                                background: activeTab === cat ? '#ff8400' : 'rgba(255,132,0,0.08)',
-                                color: activeTab === cat ? '#fff' : 'rgba(255,132,0,0.7)',
-                                border: '1px solid rgba(255,132,0,0.25)',
-                            }}
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.97 }}
-                        >
-                            {cat}
-                        </motion.button>
-                    ))}
+                <div className="flex flex-wrap gap-2 mb-8 relative">
+                    {Object.keys(pillsList).map((cat) => {
+                        const isActive = activeTab === cat;
+                        return (
+                            <motion.button
+                                key={cat}
+                                onClick={() => setActiveTab(cat)}
+                                className="relative px-5 py-2.5 rounded-full font-mono font-bold text-sm uppercase tracking-wider transition-colors duration-300 overflow-hidden"
+                                style={{
+                                    color: isActive ? '#000' : 'rgba(255,132,0,0.7)',
+                                    border: isActive ? '1px solid transparent' : '1px solid rgba(255,132,0,0.25)',
+                                    background: isActive ? 'transparent' : 'rgba(255,132,0,0.04)',
+                                }}
+                                whileHover={!isActive ? { scale: 1.06, backgroundColor: "rgba(255,132,0,0.12)" } : {}}
+                                whileTap={{ scale: 0.93 }}
+                            >
+                                {/* Sliding active pill indicator */}
+                                {isActive && (
+                                    <motion.div
+                                        layoutId="activeSkillTab"
+                                        className="absolute inset-0 rounded-full z-0"
+                                        style={{ background: 'linear-gradient(135deg, #ff8400, #cc6600)' }}
+                                        transition={{ type: "spring", stiffness: 350, damping: 25, mass: 0.8 }}
+                                    />
+                                )}
+                                <span className="relative z-10 flex items-center gap-2">
+                                    <span className="text-lg leading-none">{CATEGORY_ICONS[cat]}</span>
+                                    {cat}
+                                </span>
+                            </motion.button>
+                        );
+                    })}
                 </div>
 
                 {/* Pills grid with AnimatePresence for tab switch */}
@@ -256,14 +279,16 @@ const Skills = () => {
                                     background: 'rgba(255,132,0,0.06)',
                                     border: '1px solid rgba(255,132,0,0.15)',
                                 }}
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{ duration: 0.05, delay: i * 0.005 }}
+                                initial={{ opacity: 0, y: 20, scale: 0.92 }}
+                                animate={{ opacity: 1, y: 0, scale: 1 }}
+                                transition={{ duration: 0.28, delay: i * 0.04, ease: [0.22, 1, 0.36, 1] }}
                                 whileHover={{
                                     backgroundColor: 'rgba(255,132,0,0.15)',
                                     borderColor: 'rgba(255,132,0,0.5)',
                                     scale: 1.04,
+                                    y: -2,
                                 }}
+                                whileTap={{ scale: 0.95, backgroundColor: 'rgba(255,132,0,0.2)' }}
                             >
                                 <img
                                     src={skill.icon}

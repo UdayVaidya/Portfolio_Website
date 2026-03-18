@@ -5,6 +5,16 @@
     <link rel="icon" type="image/svg+xml" href="/logo.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Uday Vaidya</title>
+    
+    <!-- 1. Preconnect to fonts for extreme speed -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- 2. Preload the Main Avatar Profile Image so it appears instantly -->
+    <link rel="preload" as="image" href="/uday.jpeg" fetchpriority="high" />
+    
+    <!-- 3. Load UI and Code Fonts with font-display: swap to prevent invisibile text -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&family=Outfit:wght@400;600;800&family=Roboto+Condensed:wght@400;700;900&display=swap" rel="stylesheet" />
   </head>
   <body>
     <div id="root"></div>
