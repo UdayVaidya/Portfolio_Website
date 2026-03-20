@@ -374,31 +374,6 @@ const Hero = () => {
                 {/* Left column */}
                 <div className="flex flex-col max-w-4xl">
 
-                    {/* Greeting chip */}
-                    <div className="flex items-center gap-3 mb-5" ref={greetRef}>
-                        <span
-                            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-mono font-bold uppercase tracking-widest border"
-                            style={{
-                                borderColor: "rgba(255,132,0,0.35)",
-                                background: "rgba(255,132,0,0.08)",
-                                color: "#ff8400",
-                                backdropFilter: "blur(12px)",
-                            }}
-                        >
-                            <span
-                                className="w-2 h-2 rounded-full animate-pulse"
-                                style={{ background: "#ff8400", boxShadow: "0 0 8px #ff8400" }}
-                            />
-                            Available for work
-                        </span>
-                        {/* Decorative line */}
-                        <span
-                            ref={lineRef}
-                            className="hidden sm:block h-px flex-1 max-w-[80px] origin-left"
-                            style={{ background: "linear-gradient(90deg,#ff8400,transparent)" }}
-                        />
-                    </div>
-
                     {/* "Hi, my name is" */}
                     <motion.p
                         className="text-lg sm:text-xl lg:text-2xl font-mono font-bold uppercase tracking-[0.25em] mb-2"
