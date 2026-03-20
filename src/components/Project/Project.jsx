@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, Fragment } from "react";
+import ProjectDetails from "./ProjectDetails";
 
 const fadeUp = {
     hidden: { opacity: 0, y: 40 },
@@ -10,6 +11,8 @@ const fadeUp = {
     }),
 };
 
+
+
 // ─── DATA ────────────────────────────────────────────────────────────────────
 
 const projects = [
@@ -17,6 +20,7 @@ const projects = [
         title: "CodeFlow Nexus",
         description:
             "Built a real-time collaborative code editor where multiple users can edit code together using WebSockets. Implemented authentication and handled live syncing between users for smooth editing.",
+        detailedDescription: "CodeFlow Nexus is a highly interactive, real-time collaborative code editor engineered for seamless pair programming. Powered by WebSockets (Socket.io), it allows multiple developers to join a unified room, edit the same codebase concurrently, and instantly see live cursor movements. The platform features robust token-based user authentication ensuring secure workspaces, alongside syntax highlighting and instant peer-to-peer code syncing to prevent cursor conflicts and racing conditions during high-volume edits.",
         tags: ["React", "Node.js", "Socket.io"],
         github: "https://github.com/UdayVaidya/CodeFlow-Nexus",
         live: "https://code-flow-nexus.vercel.app/",
@@ -27,7 +31,8 @@ const projects = [
     {
         title: "Job Tracker With Embedded GenAI",
         description:
-            "AI-powered job tracking application with GenAI for intelligent job search and recommendations. Integrated 2 GenAI APIs for skills extraction from resumes",
+            "An AI-enhanced job tracking dashboard that utilizes dual GenAI APIs to automatically parse uploaded resumes, extract skills, and provide intelligent insights for tracked applications.",
+        detailedDescription: "Developed a robust full-stack application designed to organize and meticulously track job applications. Powered by dual Generative AI APIs, the platform introduces intelligent resume analysis by automatically parsing uploaded documents and extracting core skills. By leveraging a secure MERN stack architecture, the system maintains application statuses and notes securely, while the embedded AI provides targeted insights by comparing the user's extracted skills against the requirements of the roles they are tracking.",
         tags: ["React", "Node.js", "MongoDB", "Express", "GenAI"],
         github: "https://github.com/UdayVaidya/AI-Job-Tracker",
         live: "https://ai-job-tracker-kappa.vercel.app/",
@@ -38,8 +43,9 @@ const projects = [
     {
         title: "CineMatheque",
         description:
-            "Developed a real-time chat application using WebSockets with secure authentication and fast message delivery. Focused on backend performance and responsive UI.",
-        tags: ["Node.js", "Express.js", "ReactJS", "MongoDB"],
+            "A full-stack movie recommendation platform featuring detailed mood-based scanning, allowing users to discover personalized cinematic experiences effortlessly.",
+        detailedDescription: "CineMatheque serves as an immersive cinematic discovery platform driven by an intelligent mood-scanning recommendation engine. Built on a scalable MERN stack, the application transcends traditional search by matching users to films based on emotional states alongside robust metadata exploration. Features include secured JWT authentication, expansive API-driven movie catalogs, responsive cross-device UI built with React, and a lightning-fast Node.js backend to serve complex search queries instantly.",
+        tags: ["Node.js", "Express.js", "ReactJS", "MongoDB", "GenAI"],
         github: "https://github.com/UdayVaidya/CineMathe2ue",
         live: "https://cine-mathe2ue.vercel.app",
         sub: "Full Stack Movie Recommendation System with AI models mood scanner",
@@ -50,6 +56,7 @@ const projects = [
         title: "MovieFlix",
         description:
             "A movie discovery dashboard to browse, search, and explore movies and TV shows with details, ratings, and trailers — powered by a public movie API.",
+        detailedDescription: "MovieFlix is an aesthetically rich, API-driven dashboard designed for ultimate cinematic discovery. Consuming massive datasets from public movie APIs, it renders beautiful, Netflix-style interfaces featuring infinite scrolling, instant typeahead search, and categorized browsing (Trending, Top Rated, Action, etc.). Developed purely with React and Tailwind CSS, it boasts a perfectly responsive layout and utilizes custom hooks for smart API state management, ensuring an app-like experience optimized for low latency and high visual fidelity.",
         tags: ["React", "Tailwind CSS", "API"],
         github: "https://github.com/UdayVaidya/Movie-Flix",
         live: "https://movie-flix-roan.vercel.app/",
@@ -139,6 +146,7 @@ const SectionHeading = ({ label, title, highlight }) => (
 
 const Project = () => {
     const [hoveredIndex, setHoveredIndex] = useState(null);
+    const [selectedProject, setSelectedProject] = useState(null);
 
     // Preload all thumbnails on mount so hover is instant
     useEffect(() => {
@@ -160,7 +168,7 @@ const Project = () => {
                 {projects.map((proj, i) => (
                     <motion.div
                         key={proj.title}
-                        className="relative flex flex-col gap-4 p-6 rounded-2xl overflow-visible group"
+                        className="relative flex flex-col gap-4 p-6 rounded-2xl overflow-visible group cursor-pointer"
                         style={{
                             background: "rgba(255,132,0,0.04)",
                             border: "1px solid rgba(255,132,0,0.15)",
@@ -181,6 +189,7 @@ const Project = () => {
                         whileTap={{ scale: 0.98, borderColor: "rgba(255,132,0,0.6)" }}
                         onMouseEnter={() => proj.thumbnail && setHoveredIndex(i)}
                         onMouseLeave={() => setHoveredIndex(null)}
+                        onClick={() => setSelectedProject(proj)}
                     >
                         {/* Corner number */}
                         <span
@@ -249,23 +258,6 @@ const Project = () => {
                             )}
                         </div>
 
-                        {/* THUMBNAIL — mobile: inline below description, desktop: hover overlay */}
-                        {proj.thumbnail && (
-                            <motion.div
-                                className="block lg:hidden mt-2 rounded-xl overflow-hidden border border-white/10"
-                                initial={{ opacity: 0, y: 16 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.5, delay: 0.2 }}
-                            >
-                                <img
-                                    src={proj.thumbnail}
-                                    alt={proj.title}
-                                    className="w-full h-40 object-cover"
-                                    loading="lazy"
-                                />
-                            </motion.div>
-                        )}
 
                         {/* THUMBNAIL — desktop hover overlay */}
                         <AnimatePresence>
@@ -283,7 +275,7 @@ const Project = () => {
                                         opacity: 1,
                                         scaleX: 1,
                                         scaleY: 1,
-                                        x: -60,
+                                        x: -30,
                                         skewX: 0,
                                     }}
                                     exit={{
@@ -300,9 +292,9 @@ const Project = () => {
                                         mass: 0.6,
                                     }}
                                     className="absolute right-0 top-1/2 -translate-y-1/2
-                                            w-110 rounded-xl overflow-hidden
-                                            border border-white/10 shadow-2xl
-                                            pointer-events-none hidden lg:block"
+                                            w-48 md:w-56 lg:w-[400px] rounded-xl overflow-hidden
+                                            border border-white/10 shadow-2xl z-50
+                                            pointer-events-none hidden md:block"
                                 >
                                     <img
                                         src={proj.thumbnail}
@@ -436,6 +428,14 @@ const Project = () => {
                 </div>
             </div>
 
+            <AnimatePresence>
+                {selectedProject && (
+                    <ProjectDetails 
+                        project={selectedProject} 
+                        onClose={() => setSelectedProject(null)} 
+                    />
+                )}
+            </AnimatePresence>
         </section>
     );
 };
